@@ -16,3 +16,4 @@ filelock~=3.13.1
 redis~=5.0.1
 fastapi
 uvicorn
+pytest
