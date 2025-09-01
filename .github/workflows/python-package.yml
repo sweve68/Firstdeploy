@@ -47,6 +47,9 @@ jobs:
     needs : build-and-test
     runs-on : ubuntu-latest
 
+    env:
+      IMAGE_NAME: sweve68/firstdeploy_app:latest
+
     steps:
       - name: Login to AWS EC2
         uses: appleboy/ssh-action@v0.1.7
