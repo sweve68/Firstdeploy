@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: sweve68/firstdeploy_app:latest
+      IMAGE_NAME: firstdeploy:latest
 
     steps:
       - name : Checkout repository
@@ -20,7 +20,7 @@ jobs:
       - name : setup Python
         uses : actions/setup-python@v4
         with :
-          python-version : '3.11'
+          python-version : '3.9'
 
       - name : Install dependencies
         run : |
