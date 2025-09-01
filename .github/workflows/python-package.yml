@@ -1,8 +1,8 @@
-name : Integration
+name : Integration and deployment
 
 on:
   push:
-    branches: ['main']
+    branches: ['master']
   
 
 jobs:
