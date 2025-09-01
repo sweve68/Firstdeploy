@@ -48,16 +48,16 @@ jobs:
     runs-on : ubuntu-latest
 
     steps:
-      name: Login to AWS EC2
-      uses: appleboy/ssh-action@v0.1.7
-      with:
-        host: ${{ secrets.EC2_HOST }}
-        username: ${{ secrets.EC2_USER }}
-        key: ${{ secrets.EC2_SSH_KEY }}
-        port: ${{ secrets.EC2_PORT }}
-        script: |
-          docker pull ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}
-          docker stop ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }} || true
-          docker rm ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }} || true
-          docker run -d -p 80:8000 --name ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}
+      - name: Login to AWS EC2
+        uses: appleboy/ssh-action@v0.1.7
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          port: ${{ secrets.EC2_PORT }}
+          script: |
+            docker pull ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}
+            docker stop ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }} || true
+            docker rm ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }} || true
+            docker run -d -p 80:8000 --name ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}
 
