@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      IMAGE_NAME: firstdeploy_app:latest
+      IMAGE_NAME: sweve68/firstdeploy_app:latest
 
     steps:
       - name : Checkout repository
@@ -39,7 +39,7 @@ jobs:
 
       - name : build and push docker image
         run : |
-          docker build -t username${{ env.IMAGE_NAME }} .
+          docker build -t ${{ env.IMAGE_NAME }} .
           docker push ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}
 
   deploy:
@@ -56,8 +56,8 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           port: ${{ secrets.EC2_PORT }}
           script: |
-            docker pull ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}
-            docker stop ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }} || true
-            docker rm ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }} || true
-            docker run -d -p 80:8000 --name ${{secrets.DOCKER_USERNAME}}/${{ env.IMAGE_NAME }}
+            docker pull ${{ env.IMAGE_NAME }}
+            docker stop ${{ env.IMAGE_NAME }} || true
+            docker rm ${{ env.IMAGE_NAME }} || true
+            docker run -d -p 80:8000 ${{ env.IMAGE_NAME }}
 
